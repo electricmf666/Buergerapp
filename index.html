@@ -1,379 +1,205 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stadt Schwabach – Bürgerinterface</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buergerapp</title>
+
 <style>
 :root{
-  --bg:#f3f5f6; --surface:#ffffff; --border:#d7dee2; --text:#1f2933; --muted:#52606d;
-  --primary-2:#2aa198; --accent:#e8f6f4; --ok:#166534; --warn:#92400e; --danger:#b91c1c;
-  --shadow:0 2px 10px rgba(15,23,42,.06); --radius:10px;
+  --bg:#f3f5f6;
+  --surface:#ffffff;
+  --border:#d7dee2;
+  --text:#1f2933;
+  --muted:#52606d;
+  --primary:#2aa198;
 }
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-header{background:#111315;color:#fff;border-bottom:4px solid #2aa198}
-.topbar{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-.brand{font-size:1.05rem;font-weight:700;letter-spacing:.2px}
-.status-badge{font-size:.85rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:6px 10px;border-radius:999px;white-space:nowrap}
-.hero{max-width:1100px;margin:0 auto;padding:22px 18px 26px}
-.hero h1{margin:0 0 8px;font-size:1.6rem}
-.hero p{margin:0;color:#d6dde2;max-width:820px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.quick-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-.quick{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:14px;color:#e8eef2;text-decoration:none}
-.quick strong{display:block;margin-bottom:4px}
-main{max-width:1100px;margin:20px auto 40px;padding:0 18px}
-.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
-.stack{display:grid;gap:18px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
-.card h2{margin:0 0 12px;font-size:1.1rem}
-.sub{color:var(--muted);font-size:.95rem;margin-top:-4px;margin-bottom:14px}
-.chips{display:flex;flex-wrap:wrap;gap:10px}
-.chip{background:var(--accent);border:1px solid #bfe6e1;color:#153b3a;border-radius:999px;padding:8px 12px;font-size:.92rem}
-.chip strong{margin-left:6px}
-.summary-list{margin:0;padding-left:18px}
-.summary-list li{margin-bottom:8px}
-.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-button,.navbtn{appearance:none;border:none;border-radius:8px;padding:10px 14px;font-size:.95rem;cursor:pointer;transition:.15s ease;text-decoration:none;display:inline-block}
-.btn-primary,.navbtn{background:var(--primary-2);color:#062b29;font-weight:600}
-.btn-secondary{background:#eef2f3;color:#243b53;border:1px solid var(--border)}
-.transcript{display:none;margin-top:14px;padding:14px;border-radius:8px;background:#f8fafb;border:1px solid var(--border);color:#334e68;font-size:.95rem;white-space:pre-line}
-.live-state{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #edf2f7;gap:12px}
-.live-state:first-of-type{border-top:none;padding-top:0}
-.live-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2f3;border:1px solid var(--border);font-size:.85rem;color:#243b53}
-form{display:grid;gap:12px}
-label{font-weight:600;font-size:.94rem}
-input,select,textarea{width:100%;margin-top:6px;padding:12px;font:inherit;color:var(--text);background:#fff;border:1px solid #bcccdc;border-radius:8px}
-textarea{min-height:120px;resize:vertical}
-.hint{font-size:.85rem;color:var(--muted);margin-top:-4px}
-.panel-list{margin:0;padding-left:20px}
-.panel-list li{margin-bottom:10px}
-.metric{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #edf2f7;gap:12px}
-.metric:first-of-type{border-top:none;padding-top:0}
-.metric strong{font-size:1rem}
-.signal-up{color:var(--ok);font-weight:700}
-.signal-flat{color:var(--warn);font-weight:700}
-.notice{padding:12px 14px;border-radius:8px;border:1px solid #bfe6e1;background:#f4fbfa;color:#334e68;font-size:.93rem}
-.success{display:none;margin-top:12px;padding:12px 14px;border-radius:8px;background:#e7f6f3;border:1px solid #bfe6e1;color:#184d2d;font-size:.93rem}
-.tiny{font-size:.84rem;color:var(--muted)}
-footer{max-width:1100px;margin:0 auto 32px;padding:0 18px;color:var(--muted);font-size:.88rem}
-@media (max-width: 860px){
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HEADER */
+header{
+  background:#111315;
+  color:#fff;
+  padding:25px;
+  border-bottom:4px solid var(--primary);
+}
+
+header h1{margin:0 0 10px}
+header p{color:#cfd8dc}
+
+/* MENU (EINZIGES MENÜ) */
+.menu{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.menu a{
+  background:#1c2a2c;
+  padding:15px;
+  border-radius:10px;
+  text-decoration:none;
+  color:#fff;
+  border:1px solid #2aa198;
+  transition:0.2s;
+}
+
+.menu a:hover{
+  background:#2aa198;
+  color:#062b29;
+}
+
+/* LAYOUT */
+main{
+  padding:20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  padding:18px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  margin-bottom:20px;
+}
+
+/* BUTTON */
+button{
+  background:var(--primary);
+  border:none;
+  color:#062b29;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* FORUM */
+.post{
+  background:#f0f4f5;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+}
+
+/* MOBILE */
+@media(max-width:800px){
+  .menu{grid-template-columns:1fr}
   .grid{grid-template-columns:1fr}
-  .topbar{align-items:flex-start;flex-direction:column}
-  .quick-links{grid-template-columns:1fr}
 }
 </style>
 </head>
+
 <body>
+
 <header>
-  <div class="topbar">
-    <div class="brand">Stadt Schwabach – Bürgerinterface</div>
-    <div class="status-badge">Pilot · Testlauf Gemeindekommunikation</div>
-  </div>
-  <div class="hero">
-    <h1>Klare Themen. Strukturierter Input. Weniger Chaos.</h1>
-    <p>Ein prototypisches Bürgerinterface für Schwabach: aktuelle Themen sichtbar machen, Sitzungen verständlich verdichten, öffentliche Sitzungen besser zugänglich machen und Beiträge so erfassen, dass Verwaltung und Stadtspitze schneller Prioritäten erkennen.</p>
-    <div class="hero-actions">
-      <a class="navbtn" href="#sitzung">Zur Sitzungsauswertung</a>
-      <a class="navbtn" href="#live">Live aus dem Gemeinderat</a>
-      <a class="navbtn" href="#beitrag">Zum Bürgerbeitrag</a>
-    </div>
-    <div class="quick-links">
-      <a class="quick" href="#sitzung"><strong>Aktuelle Themenlage</strong>Brücken-Umleitungen, Beteiligung, Stadtentwicklung</a>
-      <a class="quick" href="#live"><strong>Öffentliche Sitzung live</strong>Livestream, Tagesordnung und nächste Termine</a>
-      <a class="quick" href="#beitrag"><strong>Strukturierter Input</strong>Kein Kommentar-Chaos, sondern auswertbare Meldungen</a>
-    </div>
-  </div>
+<h1>Klare Themen. Strukturierter Input. Weniger Chaos. V3</h1>
+<p>Bürgerinterface für Schwabach</p>
+
+<div class="menu">
+<a href="#sitzung">Sitzungsauswertung</a>
+<a href="#live">Live Gemeinderat</a>
+<a href="#beitrag">Bürgerbeitrag</a>
+<a href="#forum">Bürgerforum</a>
+</div>
 </header>
 
 <main>
-  <div class="grid">
-    <div class="stack">
-      <section class="card" id="termine">
-        <h2>Aktuelle Themenlage in Schwabach</h2>
-        <p class="sub">Mit realen Schwabach-Bezügen für die Bewertung des Prototyps.</p>
-        <div class="chips">
-          <div class="chip">Verkehr / Umleitungen <strong>hoch</strong></div>
-          <div class="chip">Bürgerversammlungen 2026 <strong>aktiv</strong></div>
-          <div class="chip">Vision Schwabach 2040 <strong>Leitbild</strong></div>
-          <div class="chip">Beschwerdemanagement <strong>bestehend</strong></div>
-        </div>
-      </section>
 
-      <section class="card" id="sitzung">
-        <h2>Letzte Sitzung – KI-verdichtete Auswertung</h2>
-        <p class="sub">Gleicher Inhalt, zwei Ebenen: internes Arbeitsmaterial und verständliche Bürgerfassung.</p>
-        <ul class="summary-list">
-          <li>Die Verkehrsbelastung durch Brücken- und Umleitungsmaßnahmen wird als prioritäres Thema bewertet.</li>
-          <li>Die Stadt will Beteiligung nicht nur analog über Bürgerversammlungen, sondern auch digital anschlussfähig machen.</li>
-          <li>Die Vision Schwabach 2040 bleibt als strategischer Rahmen für künftige Entscheidungen sichtbar.</li>
-        </ul>
-        <div class="btn-row">
-          <button class="btn-primary" onclick="showTranscript()">Transkript anzeigen</button>
-          <button class="btn-secondary" onclick="showSummary()">Kurzfassung für Bürger</button>
-          <button class="btn-secondary" onclick="hideTranscript()">Ansicht schließen</button>
-        </div>
-        <div id="transcript" class="transcript"></div>
-      </section>
+<div class="grid">
 
-      <section class="card" id="beitrag">
-        <h2>Dein strukturierter Beitrag</h2>
-        <p class="sub">Angelehnt an reale kommunale Anliegen: Verkehr, Beteiligung, Infrastruktur, Ordnung.</p>
-        <form onsubmit="submitForm(event)">
-          <div>
-            <label for="type">Beitragsart</label>
-            <select id="type" required>
-              <option value="">Bitte auswählen</option>
-              <option>Problem melden</option>
-              <option>Idee einreichen</option>
-              <option>Feedback zu bestehendem Thema</option>
-            </select>
-          </div>
-          <div>
-            <label for="topic">Thema</label>
-            <select id="topic" required>
-              <option value="">Bitte auswählen</option>
-              <option>Verkehr / Umleitung</option>
-              <option>Bürgerversammlung / Beteiligung</option>
-              <option>Innenstadt / Parken</option>
-              <option>Sicherheit / Ordnung</option>
-              <option>Stadtentwicklung / Vision 2040</option>
-            </select>
-          </div>
-          <div>
-            <label for="district">Ort / Bereich</label>
-            <input id="district" type="text" placeholder="z. B. Limbach, Innenstadt, O’Brien-Park, Dietersdorf" />
-          </div>
-          <div>
-            <label for="desc">Beschreibung</label>
-            <textarea id="desc" placeholder="Was genau ist das Problem, der Vorschlag oder das Feedback?"></textarea>
-          </div>
-          <div class="hint">Pilotlogik: verifizierte Identität intern, nach außen optional pseudonymisiert.</div>
-          <div class="btn-row">
-            <button class="btn-primary" type="submit">Beitrag senden</button>
-            <button class="btn-secondary" type="button" onclick="prefillExample()">Beispiel laden</button>
-            <button class="btn-secondary" type="button" onclick="resetDemo()">Zurücksetzen</button>
-          </div>
-        </form>
-        <div id="success" class="success"></div>
-      </section>
-    </div>
+<!-- LEFT -->
+<div>
 
-    <div class="stack">
-      <section class="card" id="live">
-        <h2>Live aus dem Gemeinderat</h2>
-        <p class="sub">Nur öffentlicher Teil. Offizieller Zugang statt inoffizieller Mitschnitte.</p>
+<div class="card" id="sitzung">
+<h2>Sitzungsauswertung</h2>
+<p>Verkehr durch Umleitungen aktuell Hauptthema.</p>
 
-        <div class="live-state">
-          <span>Nächste öffentliche Sitzung</span>
-          <strong>24.03.2026 · 18:00 Uhr</strong>
-        </div>
+<button onclick="toggle()">Details anzeigen</button>
 
-        <div class="live-state">
-          <span>Status</span>
-          <span class="live-pill">Kein Livestream aktiv</span>
-        </div>
+<div id="details" style="display:none;margin-top:10px;">
+Mehr Beteiligung geplant. Vision 2040 bleibt strategisch relevant.
+</div>
+</div>
 
-        <div class="live-state">
-          <span>Zugang</span>
-          <span>Offizieller Stream oder Sitzungsseite</span>
-        </div>
+<div class="card" id="beitrag">
+<h2>Bürgerbeitrag</h2>
 
-        <div class="btn-row">
-          <a class="navbtn" href="#" onclick="openLiveInfo(event)">Livestream öffnen</a>
-          <a class="btn-secondary" href="#" onclick="openAgendaInfo(event)">Tagesordnung ansehen</a>
-        </div>
+<input placeholder="Ort"><br><br>
+<textarea placeholder="Beschreibung"></textarea><br><br>
 
-        <p class="tiny">Im Echtbetrieb würde hier der offizielle Stream oder die offizielle Sitzungsseite der Stadt verlinkt werden.</p>
-      </section>
+<button onclick="send()">Beitrag senden</button>
 
-      <section class="card">
-        <h2>Priorisierte Themen – intern</h2>
-        <p class="sub">Beispielansicht für Bürgermeister, Verwaltung oder Projektleitung.</p>
-        <div class="metric"><span>Verkehrsbelastung durch Brücken-Umleitungen</span><strong class="signal-up">↑ steigt</strong></div>
-        <div class="metric"><span>Beteiligung an Bürgerversammlungen</span><strong class="signal-flat">→ ausbaufähig</strong></div>
-        <div class="metric"><span>Vision Schwabach 2040 im Alltag sichtbar machen</span><strong class="signal-flat">→ strategisch</strong></div>
-      </section>
+<div id="msg" style="margin-top:10px;"></div>
+</div>
 
-      <section class="card">
-        <h2>Systemlogik</h2>
-        <ol class="panel-list">
-          <li>Bestehende analoge Beteiligung bleibt erhalten, digital wird ergänzt.</li>
-          <li>Beschwerden, Hinweise und Ideen laufen nicht unstrukturiert ein.</li>
-          <li>Öffentliche Sitzungen können über den offiziellen Livezugang direkt verfolgt werden.</li>
-          <li>KI hilft beim Clustering, nicht beim politischen Entscheiden.</li>
-          <li>Die Stadt gewinnt Übersicht statt Mail- und Kommentarstau.</li>
-        </ol>
-      </section>
+</div>
 
-      <section class="card">
-        <h2>Hinweis zum Pilot</h2>
-        <div class="notice">Dieser Prototyp nutzt reale Schwabach-Bezüge, bleibt aber bewusst kompakt. Ziel ist Bewertung der Logik, nicht das finale Produktdesign.</div>
-        <p class="tiny">Für andere Gemeinden kann das System als White-Label-Frontend angepasst werden.</p>
-      </section>
-    </div>
-  </div>
-<section class="card" id="forum" style="margin-top:18px;">
-  <h2>Bürgerforum – verifizierte Diskussion</h2>
-  <p class="sub">Austausch zu aktuellen und langfristigen Themen. Zugang nur für verifizierte Nutzer mit Klarnamen.</p>
+<!-- RIGHT -->
+<div>
 
-  <div class="notice" style="margin-bottom:14px;">
-    Verifikationslogik im Echtbetrieb: eID / AusweisApp statt Upload sensibler Ausweisfotos. Sichtbar wären nur Name, Verifizierungsstatus und optional Stadtteil.
-  </div>
+<div class="card" id="live">
+<h2>Live Gemeinderat</h2>
+<p>Nächste Sitzung: 24.03.2026 – 18:00</p>
 
-  <div class="grid" style="grid-template-columns:1fr 1fr; gap:18px;">
-    <section class="card" style="padding:14px;">
-      <h2 style="font-size:1rem;">Aktuelle Themen</h2>
-      <div class="chips" style="margin-bottom:12px;">
-        <div class="chip">Baustellen / Umleitungen</div>
-        <div class="chip">Sicherheit / Ordnung</div>
-        <div class="chip">Öffentliche Sitzungen</div>
-      </div>
+<button onclick="alert('Noch kein Livestream aktiv')">
+Livestream öffnen
+</button>
+</div>
 
-      <div class="metric">
-        <span><strong>Verkehr in Limbach</strong><br><span class="tiny">Diskussion läuft · 18 Beiträge</span></span>
-        <strong class="signal-up">aktiv</strong>
-      </div>
+<div class="card">
+<h2>Prioritäten</h2>
+<p>Verkehr ↑ steigt</p>
+<p>Beteiligung → ausbaufähig</p>
+</div>
 
-      <div class="transcript" style="display:block; margin-top:12px;">
-        <strong>Alexander M.</strong> · verifiziert<br>
-        Die Umleitung ist morgens spürbar belastender geworden. Vielleicht braucht es temporär klarere Ausschilderung und eine bessere Taktung an Engstellen.
-      </div>
+</div>
 
-      <div class="transcript" style="display:block; margin-top:12px;">
-        <strong>Sabine Keller</strong> · verifiziert<br>
-        Ergänzend wäre sinnvoll, Stoßzeiten sichtbar zu machen und Hinweise direkt in der App zu bündeln, statt auf mehrere Seiten zu verteilen.
-      </div>
+</div>
 
-      <div class="btn-row">
-        <button class="btn-primary" type="button" onclick="alert('Im Echtbetrieb würde hier der Themenraum geöffnet.')">Themenraum öffnen</button>
-        <button class="btn-secondary" type="button" onclick="alert('Im Echtbetrieb würde hier ein verifizierter Beitrag erstellt.')">Beitrag verfassen</button>
-      </div>
-    </section>
+<!-- FORUM -->
+<div class="card" id="forum">
+<h2>Bürgerforum</h2>
 
-    <section class="card" style="padding:14px;">
-      <h2 style="font-size:1rem;">Langfristige Themen</h2>
-      <div class="chips" style="margin-bottom:12px;">
-        <div class="chip">Vision Schwabach 2040</div>
-        <div class="chip">Innenstadt</div>
-        <div class="chip">Mobilität</div>
-        <div class="chip">Jugend / Kultur</div>
-      </div>
+<div class="post">
+<b>Max Mustermann</b><br>
+Die Umleitungen sind aktuell ein echtes Problem.
+</div>
 
-      <div class="metric">
-        <span><strong>Innenstadt langfristig stärken</strong><br><span class="tiny">Diskussion läuft · 9 Beiträge</span></span>
-        <strong class="signal-flat">strategisch</strong>
-      </div>
+<div class="post">
+<b>Anna Keller</b><br>
+Mehr Transparenz bei Baustellen wäre sinnvoll.
+</div>
 
-      <div class="transcript" style="display:block; margin-top:12px;">
-        <strong>Thomas Berger</strong> · verifiziert<br>
-        Es wäre hilfreich, nicht nur Probleme zu sammeln, sondern Lösungsvorschläge nach Realisierbarkeit zu markieren: kurzfristig, mittelfristig, langfristig.
-      </div>
+</div>
 
-      <div class="transcript" style="display:block; margin-top:12px;">
-        <strong>Maria Hoffmann</strong> · verifiziert<br>
-        Für die Innenstadt wäre ein Ideenraum sinnvoll, in dem Bürger, Handel und Stadtentwicklung sichtbar an denselben Themen arbeiten können.
-      </div>
-
-      <div class="btn-row">
-        <button class="btn-primary" type="button" onclick="alert('Im Echtbetrieb würde hier der strategische Themenraum geöffnet.')">Diskussion öffnen</button>
-        <button class="btn-secondary" type="button" onclick="alert('Im Echtbetrieb würde hier ein Lösungsvorschlag eingereicht.')">Lösung vorschlagen</button>
-      </div>
-    </section>
-  </div>
-
-  <section class="card" style="margin-top:18px;">
-    <h2 style="font-size:1rem;">Regeln & Verifikation</h2>
-    <ol class="panel-list">
-      <li>Zugang nur für verifizierte Nutzer mit echtem Namen.</li>
-      <li>Verifikation im Echtbetrieb idealerweise per eID / AusweisApp, nicht per dauerhaft gespeichertem Ausweisfoto.</li>
-      <li>Beiträge laufen thematisch gebündelt, nicht als unstrukturierter Kommentarstrom.</li>
-      <li>Meldesystem, Moderation und Eskalationslogik begrenzen Trolling und persönliche Angriffe.</li>
-      <li>Verwaltung sieht Muster, Häufungen und konstruktive Lösungsansätze schneller.</li>
-    </ol>
-  </section>
-</section>
 </main>
 
-<footer>Demo-Stand · Lean-and-mean-Prototyp für kommunale Kommunikation</footer>
-
 <script>
-const transcriptBox = document.getElementById('transcript');
-const successBox = document.getElementById('success');
-
-const fullTranscript = `Fiktives Sitzungsprotokoll auf Basis realer Schwabach-Themen:
-
-TOP 1 – Verkehr und Umleitungsbelastung
-Die Verwaltung berichtet über die anhaltenden Auswirkungen der Brücken-Neubauprojekte im Umfeld von Schwabach. Besonders genannt werden Umleitungsstrecken im Bereich Limbach, Penzendorfer Straße, Flurstraße und Katzwanger Straße. Ziel ist eine bessere Information der Bürgerschaft über Belastung, Zeiträume und Ausweichrouten.
-
-TOP 2 – Bürgerversammlungen 2026
-Es wird auf die bereits terminierten Bürgerversammlungen 2026 verwiesen. Diskutiert wird, wie Bürgeranliegen früher digital sichtbar gemacht werden können, damit Versammlungen nicht nur Beschwerderaum, sondern auch strukturierte Entscheidungsgrundlage sind.
-
-TOP 3 – Vision Schwabach 2040
-Die 2025 beschlossene Vision Schwabach 2040 soll stärker in operative Projekte übersetzt werden. Dazu gehört die Frage, wie Stadtentwicklung, Mobilität und Bürgerkommunikation sichtbarer zusammenlaufen.
-
-TOP 4 – Bestehende Servicekanäle
-Die Stadt verfügt bereits über Beschwerdemanagement, Kontaktformular und Mängelmelder. Diskutiert wird, wie diese Kanäle nicht nebeneinander laufen, sondern als ein verständliches Bürgerinterface gebündelt werden könnten.
-
-TOP 5 – Nächster Schritt
-Für einen Pilotbetrieb wird vorgeschlagen, zunächst drei reale Themencluster sichtbar zu machen: Verkehr, Beteiligung und Innenstadt.`;
-
-const citizenSummary = `Kurzfassung für Bürger:
-
-1. Die Verkehrssituation rund um Umleitungen und Baustellen bleibt ein Hauptthema.
-2. Bürgerversammlungen 2026 sind terminiert – digitale Beteiligung könnte sie sinnvoll ergänzen.
-3. Die Vision Schwabach 2040 soll nicht abstrakt bleiben, sondern im Alltag sichtbar werden.
-4. Bestehende Kanäle wie Mängelmelder und Beschwerdemanagement könnten verständlicher zusammengeführt werden.
-5. Für einen Pilot wären Verkehr, Beteiligung und Innenstadt die sinnvollsten Startthemen.`;
-
-function showTranscript(){
-  transcriptBox.style.display='block';
-  transcriptBox.innerText = fullTranscript;
+function toggle(){
+  let d=document.getElementById("details");
+  d.style.display = d.style.display==="none" ? "block" : "none";
 }
 
-function showSummary(){
-  transcriptBox.style.display='block';
-  transcriptBox.innerText = citizenSummary;
-}
-
-function hideTranscript(){
-  transcriptBox.style.display='none';
-  transcriptBox.innerText='';
-}
-
-function submitForm(event){
-  event.preventDefault();
-  const type = document.getElementById('type').value || 'Beitrag';
-  const topic = document.getElementById('topic').value || 'Allgemeines Thema';
-  const district = document.getElementById('district').value || 'kein Bereich angegeben';
-  successBox.style.display = 'block';
-  successBox.innerText = `Gespeichert im Pilotmodus: ${type} zu "${topic}" (${district}). Im Echtbetrieb würde der Beitrag jetzt verifiziert, thematisch geclustert und dem zuständigen Bereich zugeordnet.`;
-}
-
-function resetDemo(){
-  document.querySelector('form').reset();
-  successBox.style.display='none';
-  successBox.innerText='';
-}
-
-function prefillExample(){
-  document.getElementById('type').value = 'Problem melden';
-  document.getElementById('topic').value = 'Verkehr / Umleitung';
-  document.getElementById('district').value = 'Limbach';
-  document.getElementById('desc').value = 'Durch die Umleitungsstrecken ist der Verkehr morgens deutlich dichter geworden. Bitte prüfen, ob temporär besser ausgeschildert oder zeitweise entlastet werden kann.';
-}
-
-function openLiveInfo(event){
-  event.preventDefault();
-  alert('Im Pilot ist noch kein offizieller Livestream hinterlegt. Später würde hier der öffentliche Stream oder die offizielle Sitzungsseite geöffnet.');
-}
-
-function openAgendaInfo(event){
-  event.preventDefault();
-  alert('Im Echtbetrieb würde hier die aktuelle Tagesordnung des öffentlichen Teils angezeigt oder verlinkt werden.');
+function send(){
+  document.getElementById("msg").innerText="Beitrag gespeichert (Demo)";
 }
 </script>
+
 </body>
 </html>
