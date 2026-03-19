@@ -40,6 +40,9 @@ button,.navbtn{appearance:none;border:none;border-radius:8px;padding:10px 14px;f
 .btn-primary,.navbtn{background:var(--primary-2);color:#062b29;font-weight:600}
 .btn-secondary{background:#eef2f3;color:#243b53;border:1px solid var(--border)}
 .transcript{display:none;margin-top:14px;padding:14px;border-radius:8px;background:#f8fafb;border:1px solid var(--border);color:#334e68;font-size:.95rem;white-space:pre-line}
+.live-state{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #edf2f7;gap:12px}
+.live-state:first-of-type{border-top:none;padding-top:0}
+.live-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2f3;border:1px solid var(--border);font-size:.85rem;color:#243b53}
 form{display:grid;gap:12px}
 label{font-weight:600;font-size:.94rem}
 input,select,textarea{width:100%;margin-top:6px;padding:12px;font:inherit;color:var(--text);background:#fff;border:1px solid #bcccdc;border-radius:8px}
@@ -56,7 +59,11 @@ textarea{min-height:120px;resize:vertical}
 .success{display:none;margin-top:12px;padding:12px 14px;border-radius:8px;background:#e7f6f3;border:1px solid #bfe6e1;color:#184d2d;font-size:.93rem}
 .tiny{font-size:.84rem;color:var(--muted)}
 footer{max-width:1100px;margin:0 auto 32px;padding:0 18px;color:var(--muted);font-size:.88rem}
-@media (max-width: 860px){.grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.quick-links{grid-template-columns:1fr}}
+@media (max-width: 860px){
+  .grid{grid-template-columns:1fr}
+  .topbar{align-items:flex-start;flex-direction:column}
+  .quick-links{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -67,14 +74,15 @@ footer{max-width:1100px;margin:0 auto 32px;padding:0 18px;color:var(--muted);fon
   </div>
   <div class="hero">
     <h1>Klare Themen. Strukturierter Input. Weniger Chaos.</h1>
-    <p>Ein prototypisches Bürgerinterface für Schwabach: aktuelle Themen sichtbar machen, Sitzungen verständlich verdichten und Beiträge so erfassen, dass Verwaltung und Stadtspitze schneller Prioritäten erkennen.</p>
+    <p>Ein prototypisches Bürgerinterface für Schwabach: aktuelle Themen sichtbar machen, Sitzungen verständlich verdichten, öffentliche Sitzungen besser zugänglich machen und Beiträge so erfassen, dass Verwaltung und Stadtspitze schneller Prioritäten erkennen.</p>
     <div class="hero-actions">
       <a class="navbtn" href="#sitzung">Zur Sitzungsauswertung</a>
+      <a class="navbtn" href="#live">Live aus dem Gemeinderat</a>
       <a class="navbtn" href="#beitrag">Zum Bürgerbeitrag</a>
     </div>
     <div class="quick-links">
       <a class="quick" href="#sitzung"><strong>Aktuelle Themenlage</strong>Brücken-Umleitungen, Beteiligung, Stadtentwicklung</a>
-      <a class="quick" href="#termine"><strong>Nächste Beteiligung</strong>Bürgerversammlungen 2026 und direkte Anträge</a>
+      <a class="quick" href="#live"><strong>Öffentliche Sitzung live</strong>Livestream, Tagesordnung und nächste Termine</a>
       <a class="quick" href="#beitrag"><strong>Strukturierter Input</strong>Kein Kommentar-Chaos, sondern auswertbare Meldungen</a>
     </div>
   </div>
@@ -154,6 +162,33 @@ footer{max-width:1100px;margin:0 auto 32px;padding:0 18px;color:var(--muted);fon
     </div>
 
     <div class="stack">
+      <section class="card" id="live">
+        <h2>Live aus dem Gemeinderat</h2>
+        <p class="sub">Nur öffentlicher Teil. Offizieller Zugang statt inoffizieller Mitschnitte.</p>
+
+        <div class="live-state">
+          <span>Nächste öffentliche Sitzung</span>
+          <strong>24.03.2026 · 18:00 Uhr</strong>
+        </div>
+
+        <div class="live-state">
+          <span>Status</span>
+          <span class="live-pill">Kein Livestream aktiv</span>
+        </div>
+
+        <div class="live-state">
+          <span>Zugang</span>
+          <span>Offizieller Stream oder Sitzungsseite</span>
+        </div>
+
+        <div class="btn-row">
+          <a class="navbtn" href="#" onclick="openLiveInfo(event)">Livestream öffnen</a>
+          <a class="btn-secondary" href="#" onclick="openAgendaInfo(event)">Tagesordnung ansehen</a>
+        </div>
+
+        <p class="tiny">Im Echtbetrieb würde hier der offizielle Stream oder die offizielle Sitzungsseite der Stadt verlinkt werden.</p>
+      </section>
+
       <section class="card">
         <h2>Priorisierte Themen – intern</h2>
         <p class="sub">Beispielansicht für Bürgermeister, Verwaltung oder Projektleitung.</p>
@@ -167,7 +202,7 @@ footer{max-width:1100px;margin:0 auto 32px;padding:0 18px;color:var(--muted);fon
         <ol class="panel-list">
           <li>Bestehende analoge Beteiligung bleibt erhalten, digital wird ergänzt.</li>
           <li>Beschwerden, Hinweise und Ideen laufen nicht unstrukturiert ein.</li>
-          <li>Die Bedienlogik innerhalb der App bleibt direkt klickbar und selbsterklärend.</li>
+          <li>Öffentliche Sitzungen können über den offiziellen Livezugang direkt verfolgt werden.</li>
           <li>KI hilft beim Clustering, nicht beim politischen Entscheiden.</li>
           <li>Die Stadt gewinnt Übersicht statt Mail- und Kommentarstau.</li>
         </ol>
@@ -213,9 +248,20 @@ const citizenSummary = `Kurzfassung für Bürger:
 4. Bestehende Kanäle wie Mängelmelder und Beschwerdemanagement könnten verständlicher zusammengeführt werden.
 5. Für einen Pilot wären Verkehr, Beteiligung und Innenstadt die sinnvollsten Startthemen.`;
 
-function showTranscript(){ transcriptBox.style.display='block'; transcriptBox.innerText = fullTranscript; }
-function showSummary(){ transcriptBox.style.display='block'; transcriptBox.innerText = citizenSummary; }
-function hideTranscript(){ transcriptBox.style.display='none'; transcriptBox.innerText=''; }
+function showTranscript(){
+  transcriptBox.style.display='block';
+  transcriptBox.innerText = fullTranscript;
+}
+
+function showSummary(){
+  transcriptBox.style.display='block';
+  transcriptBox.innerText = citizenSummary;
+}
+
+function hideTranscript(){
+  transcriptBox.style.display='none';
+  transcriptBox.innerText='';
+}
 
 function submitForm(event){
   event.preventDefault();
@@ -225,12 +271,28 @@ function submitForm(event){
   successBox.style.display = 'block';
   successBox.innerText = `Gespeichert im Pilotmodus: ${type} zu "${topic}" (${district}). Im Echtbetrieb würde der Beitrag jetzt verifiziert, thematisch geclustert und dem zuständigen Bereich zugeordnet.`;
 }
-function resetDemo(){ document.querySelector('form').reset(); successBox.style.display='none'; successBox.innerText=''; }
+
+function resetDemo(){
+  document.querySelector('form').reset();
+  successBox.style.display='none';
+  successBox.innerText='';
+}
+
 function prefillExample(){
   document.getElementById('type').value = 'Problem melden';
   document.getElementById('topic').value = 'Verkehr / Umleitung';
   document.getElementById('district').value = 'Limbach';
   document.getElementById('desc').value = 'Durch die Umleitungsstrecken ist der Verkehr morgens deutlich dichter geworden. Bitte prüfen, ob temporär besser ausgeschildert oder zeitweise entlastet werden kann.';
+}
+
+function openLiveInfo(event){
+  event.preventDefault();
+  alert('Im Pilot ist noch kein offizieller Livestream hinterlegt. Später würde hier der öffentliche Stream oder die offizielle Sitzungsseite geöffnet.');
+}
+
+function openAgendaInfo(event){
+  event.preventDefault();
+  alert('Im Echtbetrieb würde hier die aktuelle Tagesordnung des öffentlichen Teils angezeigt oder verlinkt werden.');
 }
 </script>
 </body>
