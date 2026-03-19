@@ -215,6 +215,86 @@ footer{max-width:1100px;margin:0 auto 32px;padding:0 18px;color:var(--muted);fon
       </section>
     </div>
   </div>
+<section class="card" id="forum" style="margin-top:18px;">
+  <h2>Bürgerforum – verifizierte Diskussion</h2>
+  <p class="sub">Austausch zu aktuellen und langfristigen Themen. Zugang nur für verifizierte Nutzer mit Klarnamen.</p>
+
+  <div class="notice" style="margin-bottom:14px;">
+    Verifikationslogik im Echtbetrieb: eID / AusweisApp statt Upload sensibler Ausweisfotos. Sichtbar wären nur Name, Verifizierungsstatus und optional Stadtteil.
+  </div>
+
+  <div class="grid" style="grid-template-columns:1fr 1fr; gap:18px;">
+    <section class="card" style="padding:14px;">
+      <h2 style="font-size:1rem;">Aktuelle Themen</h2>
+      <div class="chips" style="margin-bottom:12px;">
+        <div class="chip">Baustellen / Umleitungen</div>
+        <div class="chip">Sicherheit / Ordnung</div>
+        <div class="chip">Öffentliche Sitzungen</div>
+      </div>
+
+      <div class="metric">
+        <span><strong>Verkehr in Limbach</strong><br><span class="tiny">Diskussion läuft · 18 Beiträge</span></span>
+        <strong class="signal-up">aktiv</strong>
+      </div>
+
+      <div class="transcript" style="display:block; margin-top:12px;">
+        <strong>Alexander M.</strong> · verifiziert<br>
+        Die Umleitung ist morgens spürbar belastender geworden. Vielleicht braucht es temporär klarere Ausschilderung und eine bessere Taktung an Engstellen.
+      </div>
+
+      <div class="transcript" style="display:block; margin-top:12px;">
+        <strong>Sabine Keller</strong> · verifiziert<br>
+        Ergänzend wäre sinnvoll, Stoßzeiten sichtbar zu machen und Hinweise direkt in der App zu bündeln, statt auf mehrere Seiten zu verteilen.
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" type="button" onclick="alert('Im Echtbetrieb würde hier der Themenraum geöffnet.')">Themenraum öffnen</button>
+        <button class="btn-secondary" type="button" onclick="alert('Im Echtbetrieb würde hier ein verifizierter Beitrag erstellt.')">Beitrag verfassen</button>
+      </div>
+    </section>
+
+    <section class="card" style="padding:14px;">
+      <h2 style="font-size:1rem;">Langfristige Themen</h2>
+      <div class="chips" style="margin-bottom:12px;">
+        <div class="chip">Vision Schwabach 2040</div>
+        <div class="chip">Innenstadt</div>
+        <div class="chip">Mobilität</div>
+        <div class="chip">Jugend / Kultur</div>
+      </div>
+
+      <div class="metric">
+        <span><strong>Innenstadt langfristig stärken</strong><br><span class="tiny">Diskussion läuft · 9 Beiträge</span></span>
+        <strong class="signal-flat">strategisch</strong>
+      </div>
+
+      <div class="transcript" style="display:block; margin-top:12px;">
+        <strong>Thomas Berger</strong> · verifiziert<br>
+        Es wäre hilfreich, nicht nur Probleme zu sammeln, sondern Lösungsvorschläge nach Realisierbarkeit zu markieren: kurzfristig, mittelfristig, langfristig.
+      </div>
+
+      <div class="transcript" style="display:block; margin-top:12px;">
+        <strong>Maria Hoffmann</strong> · verifiziert<br>
+        Für die Innenstadt wäre ein Ideenraum sinnvoll, in dem Bürger, Handel und Stadtentwicklung sichtbar an denselben Themen arbeiten können.
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" type="button" onclick="alert('Im Echtbetrieb würde hier der strategische Themenraum geöffnet.')">Diskussion öffnen</button>
+        <button class="btn-secondary" type="button" onclick="alert('Im Echtbetrieb würde hier ein Lösungsvorschlag eingereicht.')">Lösung vorschlagen</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:18px;">
+    <h2 style="font-size:1rem;">Regeln & Verifikation</h2>
+    <ol class="panel-list">
+      <li>Zugang nur für verifizierte Nutzer mit echtem Namen.</li>
+      <li>Verifikation im Echtbetrieb idealerweise per eID / AusweisApp, nicht per dauerhaft gespeichertem Ausweisfoto.</li>
+      <li>Beiträge laufen thematisch gebündelt, nicht als unstrukturierter Kommentarstrom.</li>
+      <li>Meldesystem, Moderation und Eskalationslogik begrenzen Trolling und persönliche Angriffe.</li>
+      <li>Verwaltung sieht Muster, Häufungen und konstruktive Lösungsansätze schneller.</li>
+    </ol>
+  </section>
+</section>
 </main>
 
 <footer>Demo-Stand · Lean-and-mean-Prototyp für kommunale Kommunikation</footer>
